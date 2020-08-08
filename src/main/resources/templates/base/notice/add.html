@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_css::header('帮助问题')"></head>
+<style>
+	.icon{
+		width:30px;
+		height:30px;
+	}
+</style>
+<body>
+	<div id="dpLTE" class="container-fluid" v-cloak style="height: 420px;overflow-y: scroll;overflow-x: hidden;">
+		<table class="form" id="form">
+			<tr>
+				<td class="formTitle">标题<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="标题" maxlength="100"  v-model="tNotice.title" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
+			<tr>
+				<td class="formTitle">标题(英文)<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="标题(英文)" maxlength="300"   v-model="tNotice.enTitle" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
+			<tr>
+				<td class="formTitle">问题状态<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="tNotice.state">
+						<option value="1">可用</option>
+						<option value="2">不可用</option>
+					</select>
+					<!--<input type="text" class="form-control" placeholder="1:上架;0:下架" v-model="cmsQuestionType.status" isvalid="yes" checkexpession="NotNull">-->
+				</td>
+			</tr>
+			<tr>
+				<td class="formTitle">公告内容<font face="宋体">*</font></td>
+				<td class="formValue">
+					<!--<textarea type="text" class="form-control" placeholder="分类简介" maxlength="20" v-model="tNotice.itemDesc" isvalid="yes" checkexpession="NotNull"></textarea>-->
+					<div id="editor1">
+
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="formTitle">公告内容(英文)<font face="宋体">*</font></td>
+				<td class="formValue">
+					<!--<textarea type="text" class="form-control" placeholder="简介(英文)" maxlength="100"  v-model="tNotice.itemDescForeign" isvalid="yes" checkexpession="NotNull"></textarea>-->
+					<div id="editor2"></div>
+				</td>
+			</tr>
+
+			<tr>
+				<script id="container" name="content" type="text/plain">
+
+				</script>
+			</tr>
+
+		</table>
+	</div>
+	<div th:include="include/footer_js::footer"></div>
+	<script src='//unpkg.com/wangeditor/release/wangEditor.min.js'></script>
+	<script th:src="@{/js/base/notice/add.js}"></script>
+</body>
+</html>

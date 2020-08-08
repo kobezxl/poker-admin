@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.poker.admin.modules.poker.dao.WpStrategyPriceMapper">
+	
+	<select id="listForPage" resultType="com.cn.poker.admin.modules.poker.entity.WpStrategyPriceEntity">
+		SELECT
+			`id`, 
+			`month`, 
+			`year`, 
+			`forver`, 
+			`type`
+		FROM
+			wp_strategy_price
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO wp_strategy_price (
+			`month`, 
+			`year`, 
+			`forver`, 
+			`type`
+		)
+		VALUES (
+			#{month}, 
+			#{year}, 
+			#{forver}, 
+			#{type}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.cn.poker.admin.modules.poker.entity.WpStrategyPriceEntity">
+		SELECT
+			`id`, 
+			`month`, 
+			`year`, 
+			`forver`, 
+			`type`
+		FROM
+			wp_strategy_price
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE wp_strategy_price
+	 	<set>
+			<if test="month != null">`month` = #{month}, </if>
+			<if test="year != null">`year` = #{year}, </if>
+			<if test="forver != null">`forver` = #{forver}, </if>
+			<if test="type != null">`type` = #{type}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			wp_strategy_price
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

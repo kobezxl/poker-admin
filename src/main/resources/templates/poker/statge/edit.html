@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_css::header('策略包')"></head>
+<body>
+	<div id="dpLTE" class="container-fluid" v-cloak>
+		<table class="form" id="form">
+
+			<tr>
+				<td class="formTitle">策略包名<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="策略包名称" v-model="wpStrate.name" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
+<!--			<tr>
+	            <td class="formTitle">底池类型:1单次底池，2. 3bet底池，3. 4bet底池<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="底池类型:1单次底池，2. 3bet底池，3. 4bet底池" v-model="wpStrate.poolType" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>-->
+			<tr>
+				<td class="formTitle">底池类型<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="wpStrate.poolType">
+						<option value="1">单次底池</option>
+						<option value="2">3bet底池</option>
+						<option value="3">4bet底池</option>
+					</select>
+					<!--<input type="text" class="form-control" placeholder="1:上架;0:下架" v-model="cmsQuestionType.status" isvalid="yes" checkexpession="NotNull">-->
+				</td>
+			</tr>
+<!--			<tr>
+	            <td class="formTitle">类型:1.单挑， 2.6人桌，3.8人桌<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="类型:1.单挑， 2.6人桌，3.8人桌" v-model="wpStrate.type" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>-->
+			<tr>
+				<td class="formTitle">类型<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="wpStrate.type">
+						<option value="1">单挑</option>
+						<option value="2">六人桌</option>
+						<option value="3">八人桌</option>
+					</select>
+					<!--<input type="text" class="form-control" placeholder="1:上架;0:下架" v-model="cmsQuestionType.status" isvalid="yes" checkexpession="NotNull">-->
+				</td>
+			</tr>
+
+<!--			<tr>
+	            <td class="formTitle">价格<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="价格" v-model="wpStrate.price" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>-->
+<!--			<tr>
+	            <td class="formTitle">天数:-1代表永久<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="天数:-1代表永久" v-model="wpStrate.dayCount" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>-->
+			<tr>
+	            <td class="formTitle">排序<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="排序" v-model="wpStrate.sort" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+<!--			<tr>
+	            <td class="formTitle">创建时间<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="创建时间" v-model="wpStrate.createTime" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">创建时间<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="创建时间" v-model="wpStrate.updateTime" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>-->
+		</table>
+	</div>
+	<div th:include="include/footer_js::footer"></div>
+	<script th:src="@{/js/poker/statge/edit.js}"></script>
+</body>
+</html>
