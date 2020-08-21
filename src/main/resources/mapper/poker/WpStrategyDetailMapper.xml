@@ -111,7 +111,12 @@
 
     <select id="userList" parameterType="java.lang.String" resultType="com.cn.poker.admin.modules.poker.entity.User">
         select  t.id as userId,t.user_login as userName,t.user_nicename as nickName from wp_users t
-        where t.user_login = #{userName} or t.user_nicename = #{userName} or t.user_email = #{userName}
+        <where>
+			<if test="userName != null and userName!=''">
+				and t.user_login = #{userName} or t.user_nicename = #{userName} or t.user_email = #{userName}
+			</if>
+		</where>
+	order by t.user_registered desc
     </select>
 
     <select id="packgeList" parameterType="com.cn.poker.admin.modules.poker.entity.Strate" resultType="com.cn.poker.admin.modules.poker.entity.Strate">

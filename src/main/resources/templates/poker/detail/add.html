@@ -6,10 +6,12 @@
 		<table class="form" id="form">
 			<tr>
 	            <td class="formTitle">用户名<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="请输入用户名" v-model="wpStrategyDetail.userId" isvalid="yes" checkexpession="NotNull">
+	            <td class="formValue" id="example-1">
+					<input  type="text" class="form-control" placeholder="请输入用户名" v-model="wpStrategyDetail.userId" isvalid="yes" checkexpession="NotNull">
 	            </td>
+
         	</tr>
+
 
 			<tr>
 				<td class="formTitle">类型<font face="宋体">*</font></td>
@@ -54,5 +56,13 @@
 	</div>
 	<div th:include="include/footer_js::footer"></div>
 	<script th:src="@{/js/poker/detail/add.js}"></script>
+	<script>
+
+        $('#example-1').selectivity({
+            allowClear: true,
+            items: ['Amsterdam', 'Antwerp'/*, ...*/],
+            placeholder: 'No city selected'
+        });
+	</script>
 </body>
 </html>
