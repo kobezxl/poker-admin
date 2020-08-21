@@ -11,6 +11,6 @@ public class TaskServiceImpl implements TaskService{
      */
     @Override
     public void newUserGiving() {
-        
+
     }
 }
