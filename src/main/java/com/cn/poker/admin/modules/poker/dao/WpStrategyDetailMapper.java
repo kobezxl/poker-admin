@@ -6,6 +6,7 @@ import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 import com.cn.poker.admin.modules.sys.dao.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,4 +30,11 @@ public interface WpStrategyDetailMapper extends BaseMapper<WpStrategyDetailEntit
      * @return
      */
     List<Strate> packgeList(Strate strate);
+
+    /**
+     * 查询新注册的用户并且没有得到奖励的
+     * @param start
+     * @return
+     */
+    List<User> selectNewUser(Date start);
 }

@@ -41,7 +41,9 @@
 			`type_date`, 
 			`create_date`, 
 			`strategy_id`, 
-			`day_count`
+			`day_count`,
+			`type_num`,
+			`data_form`
 		)
 		VALUES (
 			#{userId}, 
@@ -53,7 +55,9 @@
 			#{typeDate}, 
 			#{createDate}, 
 			#{strategyId}, 
-			#{dayCount}
+			#{dayCount},
+			#{typeNum},
+			#{dataFrom}
 		)
 	</insert>
 	
@@ -125,6 +129,12 @@
             </if>
         </where>
         where t.pool_type = #{poolType} and t.type = #{type} order by id asc
+    </select>
+
+
+    <select id="selectNewUser" parameterType="java.util.Date" resultType="com.cn.poker.admin.modules.poker.entity.User">
+        SELECT t.id as userId
+        from wp_users t where t.user_registered >= #{start} and t.id not in (select user_id from wp_strategy_detail where data_form = 1)
     </select>
 
 </mapper>

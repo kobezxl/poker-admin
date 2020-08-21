@@ -52,3 +52,10 @@ spring:
 mybatis:
     mapperLocations: classpath:mapper/**/*.xml
     configLocation: classpath:mybatis.xml
+
+#系统配置
+poker:
+#开始时间
+  start: 2020-05-15 00:00:00
+#奖励时间
+  daycount: 7
