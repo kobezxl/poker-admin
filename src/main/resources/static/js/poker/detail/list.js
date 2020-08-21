@@ -23,7 +23,10 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "userId", title : "用户id", width : "100px"},
+			// {field : "userId", title : "用户id", width : "100px"},
+			{field : "userLogin", title : "用户名", width : "100px"},
+			{field : "userEmail", title : "邮箱", width : "100px"},
+			{field : "userNicename", title : "昵称", width : "100px"},
 			{field : "startDate", title : "开始时间", width : "100px"},
 			{field : "endDate", title : "结束时间", width : "100px"},
 		/*	{field : "poolType", title : "底池类型", width : "100px"},
@@ -82,10 +85,10 @@ var vm = new Vue({
 		},
 		save: function() {
 			dialogOpen({
-				title: '新增',
+				title: '用户赠送策略包',
 				url: 'poker/detail/add.html?_' + $.now(),
-				width: '420px',
-				height: '350px',
+				width: '1000px',
+				height: '600px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},

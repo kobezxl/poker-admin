@@ -26,7 +26,40 @@ function getGrid() {
 			{field : "month", title : "30天价格", width : "100px"},
 			{field : "year", title : "365天价格", width : "100px"},
 			{field : "forver", title : "永久", width : "100px"},
-			{field : "type", title : "策略包类型", width : "100px"}
+			// {field : "type", title : "策略包类型1", width : "100px"},
+            {title: '策略包类型', field: 'type', align: 'center', valign: 'middle', width: '60px', formatter: function(item, index){
+            	console.log("策略包类型:"+item)
+                    if(item == '2-0'){
+                        return '<span class="">六人桌-单个</span>';
+                    }
+                    if(item == '2-1'){
+                        return '<span class="">六人桌-单次底池</span>';
+                    }
+                    if(item == '2-2'){
+                        return '<span class="">六人桌-3bet底池</span>';
+                    }
+                    if(item == '2-3'){
+                        return '<span class="">六人桌-4bet底池</span>';
+                    }
+                    if(item == '2-4'){
+                        return '<span class="">六人桌-全部</span>';
+                    }
+                    if(item == '3-0'){
+                        return '<span class="">八人桌-单个</span>';
+                    }
+                    if(item == '3-1'){
+                        return '<span class="">八人桌-单次底池</span>';
+                    }
+                    if(item == '3-2'){
+                        return '<span class="">八人桌-3bet底池</span>';
+                    }
+                    if(item == '3-3'){
+                        return '<span class="">八人桌-4bet底池</span>';
+                    }
+                    if(item == '3-4'){
+                        return '<span class="">八人桌-全部</span>';
+                    }
+                }}
 		]
 	})
 }

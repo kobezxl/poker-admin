@@ -5,64 +5,50 @@
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
+	            <td class="formTitle">用户名<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.userId" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="请输入用户名" v-model="wpStrategyDetail.userId" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
+
 			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
+				<td class="formTitle">类型<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="wpStrategyDetail.type"  isvalid="yes" checkexpession="NotNull">
+                        <option value="">----请选择----</option>
+						<!--<option value="1" selected="selected">单挑</option>-->
+						<option value="2">六人桌</option>
+						<option value="3">八人桌</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+	            <td class="formTitle">池底<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.startDate" isvalid="yes" checkexpession="NotNull">
-	            </td>
+					<select v-model="wpStrategyDetail.poolType"  isvalid="yes" checkexpession="NotNull">
+                        <option value="">----请选择----</option>
+						<option value="1" selected  >单次底池</option>
+						<option value="2">3bet底池</option>
+						<option value="3">4bet底池</option>
+					</select>
+	             </td>
         	</tr>
 			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.endDate" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.poolType" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.type" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.gold" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.typeDate" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.createDate" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
+	            <td class="formTitle">策略包名称<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.strategyId" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
+	            <td class="formTitle">时长<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyDetail.dayCount" isvalid="yes" checkexpession="NotNull">
-	            </td>
+					<select v-model="wpStrategyDetail.dayCount" isvalid="yes" checkexpession="NotNull">
+                        <option value="">----请选择----</option>
+						<option value="1" selected >一个月</option>
+						<option value="2">一年</option>
+						<option value="3">永久</option>
+					</select>
+	             </td>
         	</tr>
 		</table>
 	</div>

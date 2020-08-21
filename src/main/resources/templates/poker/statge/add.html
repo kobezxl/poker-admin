@@ -19,8 +19,8 @@
 			<tr>
 				<td class="formTitle">底池类型<font face="宋体">*</font></td>
 				<td class="formValue">
-					<select v-model="wpStrate.poolType" readonly="readonly">
-						<option value="1">单次底池</option>
+					<select v-model="wpStrate.poolType" >
+						<option value="1" selected = "selected" >单次底池</option>
 						<option value="2">3bet底池</option>
 						<option value="3">4bet底池</option>
 					</select>
@@ -36,8 +36,8 @@
 			<tr>
 				<td class="formTitle">类型<font face="宋体">*</font></td>
 				<td class="formValue">
-					<select v-model="wpStrate.type" readonly="readonly">
-						<option value="1">单挑</option>
+					<select v-model="wpStrate.type" >
+						<option value="1" selected = "selected" >单挑</option>
 						<option value="2">六人桌</option>
 						<option value="3">八人桌</option>
 					</select>

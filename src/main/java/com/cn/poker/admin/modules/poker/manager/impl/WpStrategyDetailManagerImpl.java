@@ -3,6 +3,8 @@ package com.cn.poker.admin.modules.poker.manager.impl;
 import com.cn.poker.admin.common.entity.Page;
 import com.cn.poker.admin.common.entity.Query;
 import com.cn.poker.admin.modules.poker.dao.WpStrategyDetailMapper;
+import com.cn.poker.admin.modules.poker.entity.Strate;
+import com.cn.poker.admin.modules.poker.entity.User;
 import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 import com.cn.poker.admin.modules.poker.manager.WpStrategyDetailManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,5 +76,22 @@ public class WpStrategyDetailManagerImpl implements WpStrategyDetailManager {
 		int count = wpStrategyDetailMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	/**
+	 * 获取用户列表
+	 * @param userName
+	 * @return
+	 */
+	@Override
+	public List<User> userList(String userName) {
+		List<User> list = wpStrategyDetailMapper.userList(userName);
+		return list;
+	}
+
+    @Override
+    public List<Strate> packgeList(Strate strate) {
+        List<Strate> list=  wpStrategyDetailMapper.packgeList(strate);
+        return list;
+    }
+
 }

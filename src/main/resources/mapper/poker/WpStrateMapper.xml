@@ -3,7 +3,7 @@
 
 <mapper namespace="com.cn.poker.admin.modules.poker.dao.WpStrateMapper">
 	
-	<select id="listForPage" resultType="com.cn.poker.admin.modules.poker.entity.WpStrateEntity">
+	<select id="listForPage" resultType="com.cn.poker.admin.modules.poker.entity.WpStrateEntity" >
 		SELECT
 			`id`, 
 			`pool_type`, 
@@ -13,9 +13,15 @@
 			`day_count`, 
 			`sort`, 
 			`create_time`, 
-			`update_time`
+			`update_time`,
+		    `status`
 		FROM
 			wp_strate
+		<where>
+			<if test="name != null and name.trim() != ''">
+				AND name LIKE concat('%',#{name},'%')
+			</if>
+		</where>
 		ORDER BY
 			id DESC
 	</select>
@@ -53,7 +59,8 @@
 			`day_count`, 
 			`sort`, 
 			`create_time`, 
-			`update_time`
+			`update_time`,
+			`status`
 		FROM
 			wp_strate
 		WHERE
@@ -69,6 +76,7 @@
 			<if test="price != null">`price` = #{price}, </if>
 			<if test="dayCount != null">`day_count` = #{dayCount}, </if>
 			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="status != null">`status` = #{status}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>

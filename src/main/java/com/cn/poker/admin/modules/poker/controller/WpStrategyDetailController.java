@@ -3,6 +3,7 @@ package com.cn.poker.admin.modules.poker.controller;
 import com.cn.poker.admin.common.annotation.SysLog;
 import com.cn.poker.admin.common.entity.Page;
 import com.cn.poker.admin.common.entity.R;
+import com.cn.poker.admin.modules.poker.entity.Strate;
 import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 import com.cn.poker.admin.modules.poker.service.WpStrategyDetailService;
 import com.cn.poker.admin.modules.sys.controller.AbstractController;
@@ -77,5 +78,22 @@ public class WpStrategyDetailController extends AbstractController {
 	public R batchRemove(@RequestBody Long[] id) {
 		return wpStrategyDetailService.batchRemove(id);
 	}
-	
+
+	/**
+	 * 查询用户
+	 */
+	@RequestMapping("/userList")
+	public R userList(@RequestBody String userName) {
+		return wpStrategyDetailService.userList(userName);
+	}
+
+	/**
+	 * 获取策略包名称
+	 */
+	@RequestMapping("/packgeList")
+	public R packgeList(@RequestBody Strate strate) {
+		return wpStrategyDetailService.packgeList(strate);
+	}
+
+
 }

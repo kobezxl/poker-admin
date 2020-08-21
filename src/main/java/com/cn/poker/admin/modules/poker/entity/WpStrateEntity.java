@@ -57,13 +57,24 @@ public class WpStrateEntity implements Serializable {
 	 * 创建时间
 	 */
 	private Date updateTime;
+
+	private Integer status;    //1上架   0 下架
 	
 
 	public WpStrateEntity() {
 		super();
 	}
 
-    /**
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	/**
      * setter for id
      * @param id
      */

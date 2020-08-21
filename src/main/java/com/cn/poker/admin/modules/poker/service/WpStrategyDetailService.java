@@ -2,6 +2,7 @@ package com.cn.poker.admin.modules.poker.service;
 
 import com.cn.poker.admin.common.entity.Page;
 import com.cn.poker.admin.common.entity.R;
+import com.cn.poker.admin.modules.poker.entity.Strate;
 import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 
 import java.util.Map;
@@ -47,5 +48,18 @@ public interface WpStrategyDetailService {
      * @return
      */
 	R batchRemove(Long[] id);
-	
+
+    /**
+     * 查询用户
+     * @param userName
+     * @return
+     */
+    R userList(String userName);
+
+    /**
+     * 获取策略包列表
+     * @param strate
+     * @return
+     */
+    R packgeList(Strate strate);
 }

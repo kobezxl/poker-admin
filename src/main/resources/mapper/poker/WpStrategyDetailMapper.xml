@@ -5,19 +5,27 @@
 	
 	<select id="listForPage" resultType="com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity">
 		SELECT
-			`id`, 
-			`user_id`, 
-			`start_date`, 
-			`end_date`, 
-			`pool_type`, 
-			`type`, 
-			`gold`, 
-			`type_date`, 
-			`create_date`, 
-			`strategy_id`, 
-			`day_count`
-		FROM
-			wp_strategy_detail
+			t.`id`,
+			t.`user_id`,
+			t.`start_date`,
+			t.`end_date`,
+			t.`pool_type`,
+			t.`type`,
+			t.`gold`,
+			t.`type_date`,
+			t.`create_date`,
+			t.`strategy_id`,
+			t.`day_count`,
+			ws.user_login as userLogin,
+			ws.user_email as userEmail,
+			ws.user_nicename as userNicename
+ 		FROM
+			wp_strategy_detail t  left join wp_users ws on t.user_id = ws.id
+        <where>
+            <if test="name != null and name.trim() != ''">
+                AND t.user_id in (select id from wp_users where user_login LIKE concat('%',#{name},'%') or user_email LIKE concat('%',#{name},'%') or user_nicename LIKE concat('%',#{name},'%'))
+            </if>
+        </where>
 		ORDER BY
 			id DESC
 	</select>
@@ -96,5 +104,27 @@
 			#{id}
 		</foreach>
 	</delete>
+
+    <select id="userList" parameterType="java.lang.String" resultType="com.cn.poker.admin.modules.poker.entity.User">
+        select  t.id as userId,t.user_login as userName,t.user_nicename as nickName from wp_users t
+        where t.user_login = #{userName} or t.user_nicename = #{userName} or t.user_email = #{userName}
+    </select>
+
+    <select id="packgeList" parameterType="com.cn.poker.admin.modules.poker.entity.Strate" resultType="com.cn.poker.admin.modules.poker.entity.Strate">
+        SELECT t.name,t.id
+        from wp_strate t
+        <where>
+            <if test="poolType!=null and poolType!=''">
+              and t.pool_type = #{poolType}
+            </if>
+            <if test="type!=null and type!=''">
+            and t.type = #{type}
+            </if>
+            <if test="name!=null and name!=''">
+              and t.name like concat('%',#{name},'%')
+            </if>
+        </where>
+        where t.pool_type = #{poolType} and t.type = #{type} order by id asc
+    </select>
 
 </mapper>

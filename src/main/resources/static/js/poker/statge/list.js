@@ -27,25 +27,36 @@ function getGrid() {
 			{field : "type", title : "类型:1.单挑， 2.6人桌，3.8人桌", width : "100px"},*/
             {field : "name", title : "策略包名", width : "100px"},
             {title: '底池类型', field: 'poolType', align: 'center', valign: 'middle', width: '60px', formatter: function(item, index){
-                    if(item.poolType = 1){
+                    // console.log("底池类型:"+item);
+                    if(item == 1){
                         return '<span class="">单次底池</span>';
                     }
-                    if(item.poolType = 2){
+                    if(item == 2){
                         return '<span class="">3bet底池</span>';
                     }
-                    if(item.poolType = 3){
+                    if(item == 3){
                         return '<span class="">4bet底池</span>';
                     }
                 }},
             {title: '类型', field: 'type', align: 'center', valign: 'middle', width: '60px', formatter: function(item, index){
-                    if(item.type = 1){
+                // console.log("类型:"+item);
+                    if(item == 1){
                         return '<span class="">单挑</span>';
                     }
-                    if(item.type = 2){
+                    if(item == 2){
                         return '<span class="">六人桌</span>';
                     }
-                    if(item.type = 3){
+                    if(item == 3){
                         return '<span class="">八人桌</span>';
+                    }
+                }},
+            {title: '状态', field: 'status', align: 'center', valign: 'middle', width: '60px', formatter: function(item, index){
+                    // console.log("类型:"+item);
+                    if(item == 1){
+                        return '<span class="">上架</span>';
+                    }
+                    if(item == 0){
+                        return '<span class="">下架</span>';
                     }
                 }}
 
@@ -114,7 +125,7 @@ var vm = new Vue({
 					ids[idx] = item.id;
 				});
 				$.RemoveForm({
-					url: '../../poker//remove?_' + $.now(),
+					url: '../../poker/statge/remove?_' + $.now(),
 			    	param: ids,
 			    	success: function(data) {
 			    		vm.load();

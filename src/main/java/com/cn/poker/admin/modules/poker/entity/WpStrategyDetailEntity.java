@@ -67,7 +67,34 @@ public class WpStrategyDetailEntity implements Serializable {
 	 * 
 	 */
 	private Integer dayCount;
-	
+
+	private  String userLogin;  //登录名
+	private  String userEmail;  //邮箱
+	private  String userNicename;  //昵称
+
+	public String getUserNicename() {
+		return userNicename;
+	}
+
+	public void setUserNicename(String userNicename) {
+		this.userNicename = userNicename;
+	}
+
+	public String getUserLogin() {
+		return userLogin;
+	}
+
+	public void setUserLogin(String userLogin) {
+		this.userLogin = userLogin;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 
 	public WpStrategyDetailEntity() {
 		super();

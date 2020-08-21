@@ -22,12 +22,31 @@
 					<input type="text" class="form-control" placeholder="" v-model="wpStrategyPrice.forver" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
-			<tr>
+<!--			<tr>
 	            <td class="formTitle"><font face="宋体">策略包类型</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="wpStrategyPrice.type" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="" v-model="wpStrategyPrice.type" isvalid="yes" checkexpession="NotNull" readonly="readonly">
 	            </td>
-        	</tr>
+        	</tr>-->
+
+			<tr>
+				<td class="formTitle">策略包类型<font face="宋体">*</font></td>
+				<td class="formValue" >
+					<select v-model="wpStrategyPrice.type" disabled="disabled">
+						<option value="2-0">六人桌-单个</option>
+						<option value="2-1">六人桌-单次底池</option>
+						<option value="2-2">六人桌-3bet底池</option>
+						<option value="2-3">六人桌-4bet底池</option>
+						<option value="2-4">六人桌-全部</option>
+						<option value="3-0">八人桌-单个</option>
+						<option value="3-1">八人桌-单次底池</option>
+						<option value="3-2">八人桌-3bet底池</option>
+						<option value="3-3">八人桌-4bet底池</option>
+						<option value="3-4">八人桌-全部</option>
+					</select>
+					<!--<input type="text" class="form-control" placeholder="1:上架;0:下架" v-model="cmsQuestionType.status" isvalid="yes" checkexpession="NotNull">-->
+				</td>
+			</tr>
 		</table>
 	</div>
 	<div th:include="include/footer_js::footer"></div>

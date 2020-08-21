@@ -14,7 +14,7 @@ var vm = new Vue({
 		        return false;
 		    }
 		    $.SaveForm({
-		    	url: '../../strate/save?_' + $.now(),
+		    	// url: '../../strate/save?_' + $.now(),
 		    	param: vm.wpStrategyDetail,
 		    	success: function(data) {
 		    		$.currentIframe().vm.load();
@@ -23,3 +23,4 @@ var vm = new Vue({
 		}
 	}
 })
+

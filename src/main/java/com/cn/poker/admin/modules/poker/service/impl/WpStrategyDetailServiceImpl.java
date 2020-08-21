@@ -4,12 +4,15 @@ import com.cn.poker.admin.common.entity.Page;
 import com.cn.poker.admin.common.entity.Query;
 import com.cn.poker.admin.common.entity.R;
 import com.cn.poker.admin.common.utils.CommonUtils;
+import com.cn.poker.admin.modules.poker.entity.Strate;
+import com.cn.poker.admin.modules.poker.entity.User;
 import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 import com.cn.poker.admin.modules.poker.manager.WpStrategyDetailManager;
 import com.cn.poker.admin.modules.poker.service.WpStrategyDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -79,5 +82,17 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 		int count = wpStrategyDetailManager.batchRemove(id);
 		return CommonUtils.msg(id, count);
 	}
+
+	@Override
+	public R userList(String userName) {
+		List<User> user =  wpStrategyDetailManager.userList(userName);
+		return CommonUtils.msg(user);
+	}
+
+    @Override
+    public R packgeList(Strate strate) {
+        List<Strate> list =  wpStrategyDetailManager.packgeList(strate);
+        return CommonUtils.msg(list);
+    }
 
 }
