@@ -50,7 +50,7 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 		//校验
 		boolean validate =  valiData(wpStrategyDetail);
 		if(!validate){
-			return CommonUtils.msg(wpStrategyDetail.getMsg());
+			return CommonUtils.msg(0,wpStrategyDetail.getMsg());
 		}
 		//单个购买
 		if (wpStrategyDetail.getStrategyId()!=null) {
