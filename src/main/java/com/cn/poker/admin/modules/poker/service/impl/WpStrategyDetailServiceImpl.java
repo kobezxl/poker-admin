@@ -65,6 +65,7 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 				count=-1;
 			}
 			wpStrategyDetail.setDayCount(count);
+			wpStrategyDetail.setCreateDate(new Date());
 			wpStrategyDetail.setStartDate(new Date());
 			wpStrategyDetail.setEndDate(DateUtils.getDateAfter(count));
 			wpStrategyDetail.setUserId(wpStrategyDetail.getUserId());
@@ -83,6 +84,7 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 				count=-1;
 			}
 			wpStrategyDetail.setDayCount(count);
+			wpStrategyDetail.setCreateDate(new Date());
 			wpStrategyDetail.setStartDate(new Date());
 			wpStrategyDetail.setEndDate(DateUtils.getDateAfter(count));
 			wpStrategyDetail.setGold(0);
