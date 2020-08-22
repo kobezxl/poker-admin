@@ -4,15 +4,14 @@ import com.cn.poker.admin.common.entity.Page;
 import com.cn.poker.admin.common.entity.Query;
 import com.cn.poker.admin.common.entity.R;
 import com.cn.poker.admin.common.utils.CommonUtils;
-import com.cn.poker.admin.modules.poker.entity.Strate;
-import com.cn.poker.admin.modules.poker.entity.User;
-import com.cn.poker.admin.modules.poker.entity.WpStrateEntity;
-import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
+import com.cn.poker.admin.common.utils.DateUtils;
+import com.cn.poker.admin.modules.poker.entity.*;
 import com.cn.poker.admin.modules.poker.manager.WpStrategyDetailManager;
 import com.cn.poker.admin.modules.poker.service.WpStrategyDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -47,13 +46,51 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
      */
 	@Override
 	public R saveWpStrategyDetail(WpStrategyDetailEntity wpStrategyDetail) {
+		int number =0;
 		//校验
 		boolean validate =  valiData(wpStrategyDetail);
 		if(!validate){
 			return CommonUtils.msg(wpStrategyDetail.getMsg());
 		}
-		int count = wpStrategyDetailManager.saveWpStrategyDetail(wpStrategyDetail);
-		return CommonUtils.msg(count);
+		//单个购买
+		if (wpStrategyDetail.getStrategyId()!=null) {
+			int count = 0;
+			wpStrategyDetail.setCreateDate(new Date());
+			int dayCount = wpStrategyDetail.getDayCount();
+			if (dayCount==1) {
+				count=30;
+			}else if (dayCount==2){
+				count=365;
+			}else if(dayCount==3){
+				count=-1;
+			}
+			wpStrategyDetail.setDayCount(count);
+			wpStrategyDetail.setStartDate(new Date());
+			wpStrategyDetail.setEndDate(DateUtils.getDateAfter(count));
+			wpStrategyDetail.setUserId(wpStrategyDetail.getUserId());
+			wpStrategyDetail.setGold(0);
+			wpStrategyDetail.setTypeNum(wpStrategyDetail.getType()+"-"+"0");
+
+			number = wpStrategyDetailManager.saveWpStrategyDetail(wpStrategyDetail);
+		}else {
+			int count = 0;
+			int dayCount = wpStrategyDetail.getDayCount();
+			if (dayCount==1) {
+				count=30;
+			}else if (dayCount==2){
+				count=365;
+			}else if(dayCount==3){
+				count=-1;
+			}
+			wpStrategyDetail.setDayCount(count);
+			wpStrategyDetail.setStartDate(new Date());
+			wpStrategyDetail.setEndDate(DateUtils.getDateAfter(count));
+			wpStrategyDetail.setGold(0);
+			wpStrategyDetail.setTypeNum(wpStrategyDetail.getType()+"-"+wpStrategyDetail.getPoolType());
+
+			number = wpStrategyDetailManager.saveWpStrategyDetail(wpStrategyDetail);
+		}
+		return CommonUtils.msg(number);
 	}
 
 
@@ -63,6 +100,7 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 		User user = wpStrategyDetailManager.selectByUserId(wpStrategyDetail.getUserLogin());
 		if(user==null){
 			wpStrategyDetail.setMsg("["+wpStrategyDetail.getUserLogin()+"]用户不存在");
+			flag = false;
 		}else {
 			wpStrategyDetail.setUserId(user.getUserId());
 		}
@@ -71,6 +109,7 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 			WpStrateEntity wpStrateEntity = wpStrategyDetailManager.selectByStatgeId(wpStrategyDetail.getName());
 			if (wpStrateEntity==null) {
 				wpStrategyDetail.setMsg("["+wpStrategyDetail.getName()+"]策略包不存在");
+				flag = false;
 			}else {
 				wpStrategyDetail.setStrategyId(wpStrateEntity.getId());
 			}
