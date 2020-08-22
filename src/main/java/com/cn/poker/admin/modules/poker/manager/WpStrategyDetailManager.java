@@ -4,6 +4,7 @@ import com.cn.poker.admin.common.entity.Page;
 import com.cn.poker.admin.common.entity.Query;
 import com.cn.poker.admin.modules.poker.entity.Strate;
 import com.cn.poker.admin.modules.poker.entity.User;
+import com.cn.poker.admin.modules.poker.entity.WpStrateEntity;
 import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 
 import java.util.List;
@@ -65,4 +66,16 @@ public interface WpStrategyDetailManager {
      * @return
      */
     List<Strate> packgeList(Strate strate);
+
+    /*
+    根据登录名查询用户是否合法
+     */
+    User selectByUserId(String userLogin);
+
+    /**
+     * 查询策略包是否合法
+     * @param name
+     * @return
+     */
+    WpStrateEntity selectByStatgeId(String name);
 }

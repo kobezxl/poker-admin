@@ -76,6 +76,25 @@ public class WpStrategyDetailEntity implements Serializable {
 
 	private int dataFrom;    //是否是系统赠送:1-是，0-否
 
+	private String msg;
+	private String name ;  //策略包名称
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
 	public int getDataFrom() {
 		return dataFrom;
 	}

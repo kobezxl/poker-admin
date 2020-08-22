@@ -6,6 +6,7 @@ import com.cn.poker.admin.common.entity.R;
 import com.cn.poker.admin.common.utils.CommonUtils;
 import com.cn.poker.admin.modules.poker.entity.Strate;
 import com.cn.poker.admin.modules.poker.entity.User;
+import com.cn.poker.admin.modules.poker.entity.WpStrateEntity;
 import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 import com.cn.poker.admin.modules.poker.manager.WpStrategyDetailManager;
 import com.cn.poker.admin.modules.poker.service.WpStrategyDetailService;
@@ -46,11 +47,43 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
      */
 	@Override
 	public R saveWpStrategyDetail(WpStrategyDetailEntity wpStrategyDetail) {
+		//校验
+		boolean validate =  valiData(wpStrategyDetail);
+		if(!validate){
+			return CommonUtils.msg(wpStrategyDetail.getMsg());
+		}
 		int count = wpStrategyDetailManager.saveWpStrategyDetail(wpStrategyDetail);
 		return CommonUtils.msg(count);
 	}
 
-    /**
+
+	private boolean valiData(WpStrategyDetailEntity wpStrategyDetail) {
+		boolean flag = true;
+		//用户名
+		User user = wpStrategyDetailManager.selectByUserId(wpStrategyDetail.getUserLogin());
+		if(user==null){
+			wpStrategyDetail.setMsg("["+wpStrategyDetail.getUserLogin()+"]用户不存在");
+		}else {
+			wpStrategyDetail.setUserId(user.getUserId());
+		}
+		//策略包名
+		if(wpStrategyDetail.getName()!=null && !"".equals(wpStrategyDetail.getName())){
+			WpStrateEntity wpStrateEntity = wpStrategyDetailManager.selectByStatgeId(wpStrategyDetail.getName());
+			if (wpStrateEntity==null) {
+				wpStrategyDetail.setMsg("["+wpStrategyDetail.getName()+"]策略包不存在");
+			}else {
+				wpStrategyDetail.setStrategyId(wpStrateEntity.getId());
+			}
+		}
+
+		//
+		//
+		//
+
+		return flag;
+	}
+
+	/**
      * 根据id查询
      * @param id
      * @return

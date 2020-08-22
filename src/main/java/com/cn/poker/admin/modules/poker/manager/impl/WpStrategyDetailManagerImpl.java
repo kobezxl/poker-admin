@@ -5,6 +5,7 @@ import com.cn.poker.admin.common.entity.Query;
 import com.cn.poker.admin.modules.poker.dao.WpStrategyDetailMapper;
 import com.cn.poker.admin.modules.poker.entity.Strate;
 import com.cn.poker.admin.modules.poker.entity.User;
+import com.cn.poker.admin.modules.poker.entity.WpStrateEntity;
 import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 import com.cn.poker.admin.modules.poker.manager.WpStrategyDetailManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,5 +94,15 @@ public class WpStrategyDetailManagerImpl implements WpStrategyDetailManager {
         List<Strate> list=  wpStrategyDetailMapper.packgeList(strate);
         return list;
     }
+
+	@Override
+	public User selectByUserId(String userLogin) {
+		return wpStrategyDetailMapper.selectByUserId(userLogin);
+	}
+
+	@Override
+	public WpStrateEntity selectByStatgeId(String name) {
+		return wpStrategyDetailMapper.selectByStatgeId(name);
+	}
 
 }

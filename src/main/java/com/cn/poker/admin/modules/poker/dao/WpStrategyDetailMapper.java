@@ -2,6 +2,7 @@ package com.cn.poker.admin.modules.poker.dao;
 
 import com.cn.poker.admin.modules.poker.entity.Strate;
 import com.cn.poker.admin.modules.poker.entity.User;
+import com.cn.poker.admin.modules.poker.entity.WpStrateEntity;
 import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 import com.cn.poker.admin.modules.sys.dao.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -37,4 +38,18 @@ public interface WpStrategyDetailMapper extends BaseMapper<WpStrategyDetailEntit
      * @return
      */
     List<User> selectNewUser(Date start);
+
+    /**
+     * 查询用户名是否合法
+     * @param userLogin
+     * @return
+     */
+    User selectByUserId(String userLogin);
+
+    /**
+     * 查询策略包是否合法
+     * @param name
+     * @return
+     */
+    WpStrateEntity selectByStatgeId(String name);
 }

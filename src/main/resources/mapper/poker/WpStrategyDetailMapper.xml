@@ -142,4 +142,14 @@
         from wp_users t where t.user_registered >= #{start} and t.id not in (select user_id from wp_strategy_detail where data_form = 1)
     </select>
 
+	<select id="selectByUserId" parameterType="java.lang.String" resultType="com.cn.poker.admin.modules.poker.entity.User">
+		SELECT t.id as userId,t.user_login as userName
+		from wp_users t where t.user_login = #{userLogin} or t.user_email = #{userLogin}
+	</select>
+
+	<select id="selectByStatgeId" parameterType="java.lang.String" resultType="com.cn.poker.admin.modules.poker.entity.WpStrateEntity">
+		SELECT t.id ,t.name ,t.pool_type as poolType,t.type
+		from wp_strate t where  t.name = #{name}
+	</select>
+
 </mapper>
