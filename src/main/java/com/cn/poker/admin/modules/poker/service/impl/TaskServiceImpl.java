@@ -47,6 +47,15 @@ public class TaskServiceImpl implements TaskService{
 
     }
 
+    /**
+     * 用户时间汇总初始化
+     */
+    @Override
+    public void UserTimeSum() {
+        //1.初始化单个策略包
+        //2.初始化打包购买策略包
+    }
+
     public void saveOrder(int type,int poolType,int userId,int dayCount){
         WpStrategyDetailEntity wp = new WpStrategyDetailEntity();
         StrateInfoVo strateInfoVo = new StrateInfoVo();
