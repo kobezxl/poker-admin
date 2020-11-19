@@ -5,14 +5,11 @@ import com.cn.poker.admin.common.utils.CommonUtils;
 import com.cn.poker.admin.modules.generator.utils.UploadUtils;
 import com.cn.poker.admin.modules.picture.entity.PictureReceive;
 import com.cn.poker.admin.modules.picture.entity.RichText;
-import com.cn.poker.admin.modules.picture.entity.SysPictureEntity;
 import com.cn.poker.admin.modules.picture.entity.SysPrictureConfig;
 import com.cn.poker.admin.modules.picture.service.SysPictureService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -23,8 +20,8 @@ public class SysPictureServiceImpl implements SysPictureService {
 	
 	private final static Logger log = Logger.getLogger(SysPictureServiceImpl.class);
 	
-	@Value("${upload.pictureIP}")
-	private String pictureIP;
+//	@Value("${upload.pictureIP}")
+//	private String pictureIP;
 	
 	@Autowired
 	private SysPrictureConfig sysPrictureConfig;
@@ -37,7 +34,8 @@ public class SysPictureServiceImpl implements SysPictureService {
 	public RichText uploadUrl(MultipartFile file) {
 		log.info("开始富文本图片上传");
 		String uploadPath = sysPrictureConfig.getUploadMap().get("cmsArticlePath");
-		String uploadUrl = pictureIP + sysPrictureConfig.getUploadMap().get("cmsArticleUrl");
+//		String uploadUrl = pictureIP + sysPrictureConfig.getUploadMap().get("cmsArticleUrl");
+		String uploadUrl =  sysPrictureConfig.getUploadMap().get("cmsArticleUrl");
 		log.info("调用图片上传工具方法");
 		String url = UploadUtils.upload(uploadPath, uploadUrl, file);
 		log.info("图片上传返回结果URL:" + url);

@@ -32,40 +32,46 @@ function getGrid() {
 		/*	{field : "poolType", title : "底池类型", width : "100px"},
 			{field : "type", title : "", width : "100px"}, */
             {title: '底池类型', field: 'poolType', align: 'center', valign: 'middle', width: '60px', formatter: function(item, index){
-                    if(item.poolType = 1){
+                   console.log('池底类型:'+item)
+                    if(item == 1){
                         return '<span class="">单次底池</span>';
                     }
-                    if(item.poolType = 2){
+                    if(item == 2){
                         return '<span class="">3bet底池</span>';
                     }
-                    if(item.poolType = 3){
+                    if(item == 3){
                         return '<span class="">4bet底池</span>';
+                    }
+                    if(item == 4){
+                        return '<span class="">全部</span>';
                     }
                 }},
             {title: '类型', field: 'type', align: 'center', valign: 'middle', width: '60px', formatter: function(item, index){
-                    if(item.type = 1){
+                   console.log("类型:"+item)
+                    if(item == 1){
                         return '<span class="">单挑</span>';
                     }
-                    if(item.type = 2){
+                    if(item == 2){
                         return '<span class="">六人桌</span>';
                     }
-                    if(item.type = 3){
+                    if(item == 3){
                         return '<span class="">八人桌</span>';
                     }
                 }},
 			{field : "gold", title : "金币", width : "100px"},
 			// {field : "typeDate", title : "", width : "100px"},
 
-			{field : "strategyId", title : "", width : "100px"}, 
+			// {field : "strategyId", title : "", width : "100px"},
 			/*{field : "dayCount", title : "时长", width : "100px"}*/
             {title: '时长', field: 'dayCount', align: 'center', valign: 'middle', width: '60px', formatter: function(item, index){
-                    if(item.dayCount = -1){
+                   // console.log(item)
+                    if(item == -1){
                         return '<span class="label label-primary">永久</span>';
                     }
-                    if(item.dayCount = 30){
+                    if(item == 30){
                         return '<span class="label label-success">30天</span>';
                     }
-                    if(item.dayCount = 365){
+                    if(item == 365){
                         return '<span class="label label-warning">365天</span>';
                     }
                 }},

@@ -4,13 +4,24 @@ spring:
         driverClassName: com.mysql.jdbc.Driver
         druid:
             masterDataSource:  #主库数据源
-              url: jdbc:mysql://localhost:3306/poker_dictionary?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+              url: jdbc:mysql://localhost:3306/www_pokeradviser?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+#              url: jdbc:mysql://localhost:3306/poker_dictionary?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+
+#              阿里云
               username: www_pokeradviser
-              password: H3YCeRbmWW86jHK7
+              password: AsGW8PpXSeZZtL6m
+#             godaddy
+#              username: root
+#              password: 8e65e80fdaf25569
             slaveDataSource:  #从库数据源
-              url: jdbc:mysql://localhost:3306/poker_dictionary?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+              url: jdbc:mysql://localhost:3306/www_pokeradviser?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+#              url: jdbc:mysql://localhost:3306/poker_dictionary?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+#              阿里云
               username: www_pokeradviser
-              password: H3YCeRbmWW86jHK7
+              password: AsGW8PpXSeZZtL6m
+#             godaddy
+#              username: root
+#              password: 8e65e80fdaf25569
             initial-size: 10
             max-active: 100
             min-idle: 10

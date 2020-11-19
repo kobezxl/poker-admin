@@ -3,7 +3,7 @@
 
 <mapper namespace="com.cn.poker.admin.modules.poker.dao.WpStrateMapper">
 	
-	<select id="listForPage" resultType="com.cn.poker.admin.modules.poker.entity.WpStrateEntity" >
+	<select id="listForPage" resultType="com.cn.poker.admin.modules.poker.entity.WpStrateEntity" parameterType="com.cn.poker.admin.modules.poker.entity.WpStrateEntity">
 		SELECT
 			`id`, 
 			`pool_type`, 
@@ -20,6 +20,12 @@
 		<where>
 			<if test="name != null and name.trim() != ''">
 				AND name LIKE concat('%',#{name},'%')
+			</if>
+            <if test="type != null and type != ''">
+				AND type = #{type}
+			</if>
+            <if test="poolType != null and poolType != ''">
+				AND pool_type = #{poolType}
 			</if>
 		</where>
 		ORDER BY

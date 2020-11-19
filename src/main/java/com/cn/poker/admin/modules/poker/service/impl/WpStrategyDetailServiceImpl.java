@@ -114,6 +114,8 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 				flag = false;
 			}else {
 				wpStrategyDetail.setStrategyId(wpStrateEntity.getId());
+				wpStrategyDetail.setPoolType(wpStrateEntity.getPoolType());
+				wpStrategyDetail.setType(wpStrateEntity.getType());
 			}
 		}
 

@@ -18,7 +18,9 @@ function getGrid() {
 		url: '../../poker/statge/list?_' + $.now(),
 		height: $(window).height()-56,
 		queryParams: function(params){
-			params.name = vm.keyword;
+			params.name = vm.name;
+			params.type = vm.type;
+			params.poolType = vm.poolType;
 			return params;
 		},
 		columns: [
@@ -83,7 +85,9 @@ function getGrid() {
 var vm = new Vue({
 	el:'#dpLTE',
 	data: {
-		keyword: null
+		name: null,
+		type: null,
+        poolType: null,
 	},
 	methods : {
 		load: function() {

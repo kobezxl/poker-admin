@@ -12,7 +12,6 @@
 			t.`pool_type`,
 			t.`type`,
 			t.`gold`,
-			t.`type_date`,
 			t.`create_date`,
 			t.`strategy_id`,
 			t.`day_count`,
@@ -37,8 +36,7 @@
 			`end_date`, 
 			`pool_type`, 
 			`type`, 
-			`gold`, 
-			`type_date`, 
+			`gold`,
 			`create_date`, 
 			`strategy_id`, 
 			`day_count`,
@@ -51,8 +49,7 @@
 			#{endDate}, 
 			#{poolType}, 
 			#{type}, 
-			#{gold}, 
-			#{typeDate}, 
+			#{gold},
 			#{createDate}, 
 			#{strategyId}, 
 			#{dayCount},
@@ -69,8 +66,7 @@
 			`end_date`, 
 			`pool_type`, 
 			`type`, 
-			`gold`, 
-			`type_date`, 
+			`gold`,
 			`create_date`, 
 			`strategy_id`, 
 			`day_count`
@@ -89,7 +85,6 @@
 			<if test="poolType != null">`pool_type` = #{poolType}, </if>
 			<if test="type != null">`type` = #{type}, </if>
 			<if test="gold != null">`gold` = #{gold}, </if>
-			<if test="typeDate != null">`type_date` = #{typeDate}, </if>
 			<if test="createDate != null">`create_date` = #{createDate}, </if>
 			<if test="strategyId != null">`strategy_id` = #{strategyId}, </if>
 			<if test="dayCount != null">`day_count` = #{dayCount}</if>
