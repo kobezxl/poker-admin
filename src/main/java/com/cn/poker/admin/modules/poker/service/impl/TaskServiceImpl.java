@@ -5,6 +5,7 @@ import com.cn.poker.admin.common.utils.DateUtils;
 import com.cn.poker.admin.modules.poker.dao.WpStrategyDetailMapper;
 import com.cn.poker.admin.modules.poker.entity.StrateInfoVo;
 import com.cn.poker.admin.modules.poker.entity.User;
+import com.cn.poker.admin.modules.poker.entity.WpStratePackSumEntity;
 import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
 import com.cn.poker.admin.modules.poker.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,6 +74,22 @@ public class TaskServiceImpl implements TaskService{
         wp.setTypeNum(type+"-"+poolType);
         wp.setDataFrom(1);//是否是系统赠送:1-是，0-否
         wpStrategyDetailMapper.save(wp);
+        //初始化钱包
+        WpStratePackSumEntity wpStratePackSumEntity = null;
+        List<WpStratePackSumEntity> list = new ArrayList<>();
+        for (int j = 2; j <= 3 ; j++) {
+            for (int i = 1; i <= 4; i++) {
+                wpStratePackSumEntity = new WpStratePackSumEntity();
+                wpStratePackSumEntity.setPoolType(i);
+                wpStratePackSumEntity.setUserId(userId);
+                wpStratePackSumEntity.setType(j);
+                wpStratePackSumEntity.setStartTime(wp.getStartDate());
+                wpStratePackSumEntity.setEndTime(wp.getEndDate());
+                list.add(wpStratePackSumEntity);
+            }
+        }
+        wpStrategyDetailMapper.insertBatch(list);
+
     }
 
 }

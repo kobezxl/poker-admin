@@ -1,11 +1,9 @@
 package com.cn.poker.admin.modules.poker.dao;
 
-import com.cn.poker.admin.modules.poker.entity.Strate;
-import com.cn.poker.admin.modules.poker.entity.User;
-import com.cn.poker.admin.modules.poker.entity.WpStrateEntity;
-import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
+import com.cn.poker.admin.modules.poker.entity.*;
 import com.cn.poker.admin.modules.sys.dao.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -52,4 +50,10 @@ public interface WpStrategyDetailMapper extends BaseMapper<WpStrategyDetailEntit
      * @return
      */
     WpStrateEntity selectByStatgeId(String name);
+
+    /**
+     * 批量初始化用户打包购买策略包汇总
+     * @param list
+     */
+    void insertBatch(@Param("stratePackSumList") List<WpStratePackSumEntity> list);
 }
