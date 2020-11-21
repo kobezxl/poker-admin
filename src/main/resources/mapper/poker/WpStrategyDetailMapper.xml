@@ -158,4 +158,8 @@
 			)
 		</foreach>
 	</insert>
+
+	<update id="updateUser" parameterType="java.lang.Integer" >
+		update wp_users t set t.bl_status = 1 where t.user_id = #{userId}
+	</update>
 </mapper>

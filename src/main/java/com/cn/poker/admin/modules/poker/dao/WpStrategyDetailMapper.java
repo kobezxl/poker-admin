@@ -56,4 +56,6 @@ public interface WpStrategyDetailMapper extends BaseMapper<WpStrategyDetailEntit
      * @param list
      */
     void insertBatch(@Param("stratePackSumList") List<WpStratePackSumEntity> list);
+
+    void updateUser(int userId);
 }

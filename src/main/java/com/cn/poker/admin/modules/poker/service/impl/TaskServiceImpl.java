@@ -45,6 +45,7 @@ public class TaskServiceImpl implements TaskService{
             //购买一个6人桌全部策略包和一个 8人桌的全部策略包
             saveOrder(2,4,user.getUserId(),dayCount);
             saveOrder(3,4,user.getUserId(),dayCount);
+            wpStrategyDetailMapper.updateUser(user.getUserId());
         }
 
     }
