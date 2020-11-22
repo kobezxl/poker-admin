@@ -2,11 +2,10 @@ package com.cn.poker.admin.modules.poker.service.impl;
 
 import com.cn.poker.admin.common.entity.PokerConfig;
 import com.cn.poker.admin.common.utils.DateUtils;
+import com.cn.poker.admin.modules.poker.dao.WpStrateMapper;
+import com.cn.poker.admin.modules.poker.dao.WpStrateSingleSumMapper;
 import com.cn.poker.admin.modules.poker.dao.WpStrategyDetailMapper;
-import com.cn.poker.admin.modules.poker.entity.StrateInfoVo;
-import com.cn.poker.admin.modules.poker.entity.User;
-import com.cn.poker.admin.modules.poker.entity.WpStratePackSumEntity;
-import com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity;
+import com.cn.poker.admin.modules.poker.entity.*;
 import com.cn.poker.admin.modules.poker.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +24,13 @@ public class TaskServiceImpl implements TaskService{
 
     @Autowired
     private WpStrategyDetailMapper wpStrategyDetailMapper;
+
+    @Autowired
+    private WpStrateSingleSumMapper wpStrateSingleSumMapper;
+
+    @Autowired
+    private WpStrateMapper wpStrateMapper;
+
     /**
      * 新用户赠送策略包
      */
@@ -90,7 +96,28 @@ public class TaskServiceImpl implements TaskService{
             }
         }
         wpStrategyDetailMapper.insertBatch(list);
+        //再以打包购买策略包为准 初始化单个策略包
+        for (int i = 2; i <= 3; i++) {     // 6人桌    8人桌
+            for (int j = 1; j <= 3; j++) {   // 单底池     3bet底池    6bet底池      全部
+                    List<WpStrateSingleSumEntity> wpStrateSingleSumEntityList = getStrateSingleSumZero(i,j,userId);  //初始化为0
+                    wpStrateSingleSumMapper.insertBatch(wpStrateSingleSumEntityList);
+            }
 
+        }
+
+    }
+
+
+    private List<WpStrateSingleSumEntity> getStrateSingleSumZero(int type, int poolType, Integer userId) {
+        List<WpStrateSingleSumEntity> list = new ArrayList<>();
+        WpStrateSingleSumEntity wpStrateSingleSumEntity = null;
+        WpStrateEntity wpStrateEntity = new WpStrateEntity(poolType,type);
+        List<WpStrateEntity> strateEntityList =  wpStrateMapper.getList(wpStrateEntity);
+        for (WpStrateEntity strateEntity : strateEntityList) {
+            wpStrateSingleSumEntity = new WpStrateSingleSumEntity(userId,strateEntity.getId(),type,poolType,null,null);
+            list.add(wpStrateSingleSumEntity);
+        }
+        return list;
     }
 
 }

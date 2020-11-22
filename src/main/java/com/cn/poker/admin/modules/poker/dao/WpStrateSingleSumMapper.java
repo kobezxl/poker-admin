@@ -3,6 +3,9 @@ package com.cn.poker.admin.modules.poker.dao;
 import com.cn.poker.admin.modules.poker.entity.WpStrateSingleSumEntity;
 import com.cn.poker.admin.modules.sys.dao.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 /**
@@ -16,4 +19,6 @@ public interface WpStrateSingleSumMapper extends BaseMapper<WpStrateSingleSumEnt
     void update2(WpStrateSingleSumEntity getwpStrateSingleSum);
 
     void update1(WpStrateSingleSumEntity getwpStrateSingleSum);
+
+    void insertBatch(@Param("strateSingleSumList") List<WpStrateSingleSumEntity> list);
 }

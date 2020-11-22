@@ -101,4 +101,20 @@
 		</foreach>
 	</delete>
 
+
+	<select id="getList" resultType="com.cn.poker.admin.modules.poker.entity.WpStrateEntity">
+		SELECT
+		`id`,
+		`pool_type`,
+		`type`,
+		`name`,
+		`price`,
+		`day_count`,
+		`sort`,
+		`create_time`,
+		`update_time`
+		FROM
+		wp_strate
+		where pool_type = #{poolType} and `type` = #{type}
+	</select>
 </mapper>

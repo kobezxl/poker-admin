@@ -64,7 +64,10 @@ public class WpStrateEntity implements Serializable {
 	public WpStrateEntity() {
 		super();
 	}
-
+	public WpStrateEntity(Integer poolType, Integer type) {
+		this.poolType = poolType;
+		this.type = type;
+	}
 
 	public Integer getStatus() {
 		return status;
