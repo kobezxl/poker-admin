@@ -37,7 +37,7 @@ public class WpStrategyDetailController extends AbstractController {
 	}
 		
 	/**
-	 * 新增
+	 * 新增---用户赠送策略包
 	 * @param wpStrategyDetail
 	 * @return
 	 */

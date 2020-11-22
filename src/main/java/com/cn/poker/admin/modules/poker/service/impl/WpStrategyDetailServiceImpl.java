@@ -5,6 +5,8 @@ import com.cn.poker.admin.common.entity.Query;
 import com.cn.poker.admin.common.entity.R;
 import com.cn.poker.admin.common.utils.CommonUtils;
 import com.cn.poker.admin.common.utils.DateUtils;
+import com.cn.poker.admin.modules.poker.dao.WpStratePackSumMapper;
+import com.cn.poker.admin.modules.poker.dao.WpStrateSingleSumMapper;
 import com.cn.poker.admin.modules.poker.entity.*;
 import com.cn.poker.admin.modules.poker.manager.WpStrategyDetailManager;
 import com.cn.poker.admin.modules.poker.service.WpStrategyDetailService;
@@ -25,6 +27,10 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 
 	@Autowired
 	private WpStrategyDetailManager wpStrategyDetailManager;
+	@Autowired
+	private WpStrateSingleSumMapper wpStrateSingleSumMapper;
+	@Autowired
+	private WpStratePackSumMapper wpStratePackSumMapper;
 
     /**
      * 分页查询
@@ -71,8 +77,9 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 			wpStrategyDetail.setUserId(wpStrategyDetail.getUserId());
 			wpStrategyDetail.setGold(0);
 			wpStrategyDetail.setTypeNum(wpStrategyDetail.getType()+"-"+"0");
-
 			number = wpStrategyDetailManager.saveWpStrategyDetail(wpStrategyDetail);
+			WpStrateSingleSumEntity wpStrateSingleSumEntity = getWpStrateSingleSumEntity(wpStrategyDetail);
+			wpStrateSingleSumMapper.update(wpStrateSingleSumEntity);
 		}else {
 			int count = 0;
 			int dayCount = wpStrategyDetail.getDayCount();
@@ -89,10 +96,28 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 			wpStrategyDetail.setEndDate(DateUtils.getDateAfter(count));
 			wpStrategyDetail.setGold(0);
 			wpStrategyDetail.setTypeNum(wpStrategyDetail.getType()+"-"+wpStrategyDetail.getPoolType());
-
 			number = wpStrategyDetailManager.saveWpStrategyDetail(wpStrategyDetail);
+			Integer poolType = wpStrategyDetail.getPoolType();
+			if(poolType==4){//全量购买
+				wpStratePackSumMapper.update2(getWpStratePackSumEntity(wpStrategyDetail));
+				wpStrateSingleSumMapper.update2(getwpStrateSingleSum(wpStrategyDetail));
+			}else { //非全量购买
+				wpStratePackSumMapper.update(getWpStratePackSumEntity(wpStrategyDetail));
+				wpStrateSingleSumMapper.update1(getwpStrateSingleSum(wpStrategyDetail));
+			}
 		}
 		return CommonUtils.msg(number);
+	}
+
+	private WpStrateSingleSumEntity getWpStrateSingleSumEntity(WpStrategyDetailEntity wpStrategyDetail) {
+		WpStrateSingleSumEntity wpStrateSingleSumEntity = new WpStrateSingleSumEntity();
+		wpStrateSingleSumEntity.setPackageId(wpStrategyDetail.getStrategyId());
+		wpStrateSingleSumEntity.setUserId(wpStrategyDetail.getUserId());
+		wpStrateSingleSumEntity.setPoolType(wpStrategyDetail.getPoolType());
+		wpStrateSingleSumEntity.setType(wpStrategyDetail.getType());
+		wpStrateSingleSumEntity.setStartTime(wpStrategyDetail.getStartDate());
+		wpStrateSingleSumEntity.setEndTime(wpStrategyDetail.getEndDate());
+		return wpStrateSingleSumEntity;
 	}
 
 
@@ -108,7 +133,7 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 		}
 		//策略包名
 		if(wpStrategyDetail.getName()!=null && !"".equals(wpStrategyDetail.getName())){
-			WpStrateEntity wpStrateEntity = wpStrategyDetailManager.selectByStatgeId(wpStrategyDetail.getName());
+			WpStrateEntity wpStrateEntity = wpStrategyDetailManager.selectByStatgeId(wpStrategyDetail);
 			if (wpStrateEntity==null) {
 				wpStrategyDetail.setMsg("["+wpStrategyDetail.getName()+"]策略包不存在");
 				flag = false;
@@ -170,5 +195,27 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
         List<Strate> list =  wpStrategyDetailManager.packgeList(strate);
         return CommonUtils.msg(list);
     }
+
+
+	private WpStratePackSumEntity getWpStratePackSumEntity(WpStrategyDetailEntity orderVo) {
+		WpStratePackSumEntity wpStratePackSumEntity = new WpStratePackSumEntity();
+		wpStratePackSumEntity.setUserId(orderVo.getUserId());
+		wpStratePackSumEntity.setType(orderVo.getType());
+		wpStratePackSumEntity.setPoolType(orderVo.getPoolType());
+		wpStratePackSumEntity.setStartTime(orderVo.getStartDate());
+		wpStratePackSumEntity.setEndTime(orderVo.getEndDate());
+
+		return wpStratePackSumEntity;
+	}
+
+	private WpStrateSingleSumEntity getwpStrateSingleSum(WpStrategyDetailEntity orderVo) {
+		WpStrateSingleSumEntity wpStrateSingleSumEntity = new WpStrateSingleSumEntity();
+		wpStrateSingleSumEntity.setUserId(orderVo.getUserId());
+		wpStrateSingleSumEntity.setType(orderVo.getType());
+		wpStrateSingleSumEntity.setPoolType(orderVo.getPoolType());
+		wpStrateSingleSumEntity.setStartTime(orderVo.getStartDate());
+		wpStrateSingleSumEntity.setEndTime(orderVo.getEndDate());
+		return wpStrateSingleSumEntity;
+	}
 
 }

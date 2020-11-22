@@ -77,5 +77,5 @@ public interface WpStrategyDetailManager {
      * @param name
      * @return
      */
-    WpStrateEntity selectByStatgeId(String name);
+    WpStrateEntity selectByStatgeId(WpStrategyDetailEntity name);
 }

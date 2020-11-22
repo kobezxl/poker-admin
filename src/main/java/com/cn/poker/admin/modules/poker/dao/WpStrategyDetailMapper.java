@@ -49,7 +49,7 @@ public interface WpStrategyDetailMapper extends BaseMapper<WpStrategyDetailEntit
      * @param name
      * @return
      */
-    WpStrateEntity selectByStatgeId(String name);
+    WpStrateEntity selectByStatgeId(WpStrategyDetailEntity name);
 
     /**
      * 批量初始化用户打包购买策略包汇总

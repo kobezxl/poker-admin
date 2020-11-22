@@ -101,7 +101,7 @@ public class WpStrategyDetailManagerImpl implements WpStrategyDetailManager {
 	}
 
 	@Override
-	public WpStrateEntity selectByStatgeId(String name) {
+	public WpStrateEntity selectByStatgeId(WpStrategyDetailEntity name) {
 		return wpStrategyDetailMapper.selectByStatgeId(name);
 	}
 

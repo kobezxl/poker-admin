@@ -142,9 +142,15 @@
 		from wp_users t where t.user_login = #{userLogin} or t.user_email = #{userLogin}
 	</select>
 
-	<select id="selectByStatgeId" parameterType="java.lang.String" resultType="com.cn.poker.admin.modules.poker.entity.WpStrateEntity">
+	<select id="selectByStatgeId" parameterType="com.cn.poker.admin.modules.poker.entity.WpStrategyDetailEntity" resultType="com.cn.poker.admin.modules.poker.entity.WpStrateEntity">
 		SELECT t.id ,t.name ,t.pool_type as poolType,t.type
 		from wp_strate t where  t.name = #{name}
+		<if test="type!=null and type !=''" >
+			and t.type= #{type}
+		</if>
+		<if test="poolType!=null and poolType !=''" >
+			and t.pool_type= #{poolType}
+		</if>
 	</select>
 
 
