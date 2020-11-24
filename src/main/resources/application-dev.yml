@@ -44,7 +44,7 @@ spring:
 
 
 #图片上传配置
-upload: 
+upload:
   uploadMap:
     cmsArticlePath: /home/photo/
     cmsArticleUrl: /
