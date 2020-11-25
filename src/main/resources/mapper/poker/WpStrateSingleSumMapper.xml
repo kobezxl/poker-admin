@@ -93,7 +93,8 @@
 	<update id="update2">
 		UPDATE wp_strate_single_sum
 		<set>
-			<if test="endTime != null">`end_time` = date_add(end_time,interval #{daySum} day), </if>
+			<if test="startTime != null">`start_time` = #{startTime}, </if>
+			<if test="endTime != null">`end_time` = #{endTime}, </if>
 			`update_time` = now()
 		</set>
 		WHERE
