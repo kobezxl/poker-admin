@@ -65,15 +65,18 @@ function getGrid() {
 			/*{field : "dayCount", title : "时长", width : "100px"}*/
             {title: '时长', field: 'dayCount', align: 'center', valign: 'middle', width: '60px', formatter: function(item, index){
                    // console.log(item)
+					var s = item;
                     if(item == -1){
-                        return '<span class="label label-primary">永久</span>';
+                        return '<span class="label label-success">永久</span>';
                     }
                     if(item == 30){
                         return '<span class="label label-success">30天</span>';
                     }
                     if(item == 365){
-                        return '<span class="label label-warning">365天</span>';
-                    }
+                        return '<span class="label label-success">365天</span>';
+                    }else {
+						return '<span class="label label-success">5天</span>';
+					}
                 }},
             {field : "createDate", title : "购买时间", width : "100px"},
 		]

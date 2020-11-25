@@ -80,10 +80,26 @@
 	<update id="update2">
 		UPDATE wp_strate_pack_sum
 		<set>
+			<if test="startTime != null">`start_time` = #{startTime}, </if>
+			<if test="endTime != null">`end_time` = #{endTime}, </if>
+			`update_time` = now()
+		</set>
+		WHERE
+		user_id = #{userId} and type = #{type}
+	</update>
+
+	<update id="update3">
+		UPDATE wp_strate_pack_sum
+		<set>
 			<if test="endTime != null">`end_time` = date_add(end_time,interval #{daySum} day), </if>
 			`update_time` = now()
 		</set>
 		WHERE
 		user_id = #{userId} and type = #{type}
 	</update>
+
+
+	<select id="selectByUserId" resultType="com.cn.poker.admin.modules.poker.entity.WpStratePackSumEntity">
+		select t.* from wp_strate_pack_sum t where t.user_id = #{userId} and t.type=#{type} and t.pool_type = #{poolType} and t.end_time > sysdate()
+	</select>
 </mapper>

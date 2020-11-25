@@ -21,4 +21,7 @@ public interface WpStrateSingleSumMapper extends BaseMapper<WpStrateSingleSumEnt
     void update1(WpStrateSingleSumEntity getwpStrateSingleSum);
 
     void insertBatch(@Param("strateSingleSumList") List<WpStrateSingleSumEntity> list);
+
+    void update3(WpStrateSingleSumEntity getwpStrateSingleSum);
+
 }

@@ -73,7 +73,7 @@ public class TaskServiceImpl implements TaskService{
         wp.setCreateDate(new Date());
         wp.setPoolType(poolType);
         wp.setType(type);
-        wp.setDayCount(30);//写死三十天
+        wp.setDayCount(dayCount);//写死三十天
         wp.setStartDate(new Date());
         wp.setEndDate(DateUtils.getDateAfter(dayCount));
         wp.setUserId(userId);
@@ -84,37 +84,37 @@ public class TaskServiceImpl implements TaskService{
         //初始化钱包
         WpStratePackSumEntity wpStratePackSumEntity = null;
         List<WpStratePackSumEntity> list = new ArrayList<>();
-        for (int j = 2; j <= 3 ; j++) {
+//        for (int j = 2; j <= 3 ; j++) {
             for (int i = 1; i <= 4; i++) {
                 wpStratePackSumEntity = new WpStratePackSumEntity();
                 wpStratePackSumEntity.setPoolType(i);
                 wpStratePackSumEntity.setUserId(userId);
-                wpStratePackSumEntity.setType(j);
+                wpStratePackSumEntity.setType(type);
                 wpStratePackSumEntity.setStartTime(wp.getStartDate());
                 wpStratePackSumEntity.setEndTime(wp.getEndDate());
                 list.add(wpStratePackSumEntity);
             }
-        }
+//        }
         wpStrategyDetailMapper.insertBatch(list);
         //再以打包购买策略包为准 初始化单个策略包
-        for (int i = 2; i <= 3; i++) {     // 6人桌    8人桌
+//        for (int i = 2; i <= 3; i++) {     // 6人桌    8人桌
             for (int j = 1; j <= 3; j++) {   // 单底池     3bet底池    6bet底池      全部
-                    List<WpStrateSingleSumEntity> wpStrateSingleSumEntityList = getStrateSingleSumZero(i,j,userId);  //初始化为0
+                    List<WpStrateSingleSumEntity> wpStrateSingleSumEntityList = getStrateSingleSumZero(type,j,userId,wp);  //初始化为0
                     wpStrateSingleSumMapper.insertBatch(wpStrateSingleSumEntityList);
-            }
+//            }
 
         }
 
     }
 
 
-    private List<WpStrateSingleSumEntity> getStrateSingleSumZero(int type, int poolType, Integer userId) {
+    private List<WpStrateSingleSumEntity> getStrateSingleSumZero(int type, int poolType, Integer userId,WpStrategyDetailEntity wp) {
         List<WpStrateSingleSumEntity> list = new ArrayList<>();
         WpStrateSingleSumEntity wpStrateSingleSumEntity = null;
         WpStrateEntity wpStrateEntity = new WpStrateEntity(poolType,type);
         List<WpStrateEntity> strateEntityList =  wpStrateMapper.getList(wpStrateEntity);
         for (WpStrateEntity strateEntity : strateEntityList) {
-            wpStrateSingleSumEntity = new WpStrateSingleSumEntity(userId,strateEntity.getId(),type,poolType,null,null);
+            wpStrateSingleSumEntity = new WpStrateSingleSumEntity(userId,strateEntity.getId(),type,poolType,wp.getStartDate(),wp.getEndDate());
             list.add(wpStrateSingleSumEntity);
         }
         return list;

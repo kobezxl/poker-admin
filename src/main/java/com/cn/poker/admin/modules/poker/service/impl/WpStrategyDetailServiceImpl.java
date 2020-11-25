@@ -98,12 +98,25 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 			wpStrategyDetail.setTypeNum(wpStrategyDetail.getType()+"-"+wpStrategyDetail.getPoolType());
 			number = wpStrategyDetailManager.saveWpStrategyDetail(wpStrategyDetail);
 			Integer poolType = wpStrategyDetail.getPoolType();
+			List<WpStratePackSumEntity> list =  wpStratePackSumMapper.selectByUserId(poolType,wpStrategyDetail.getType(),wpStrategyDetail.getUserId());
 			if(poolType==4){//全量购买
-				wpStratePackSumMapper.update2(getWpStratePackSumEntity(wpStrategyDetail));
-				wpStrateSingleSumMapper.update2(getwpStrateSingleSum(wpStrategyDetail));
+				if (list!=null && list.size()>0) {  //没到期 叠加
+					wpStratePackSumMapper.update3(getWpStratePackSumEntity(wpStrategyDetail));
+					wpStrateSingleSumMapper.update3(getwpStrateSingleSum(wpStrategyDetail));
+				}else {//到期，直接跟新
+					wpStratePackSumMapper.update2(getWpStratePackSumEntity(wpStrategyDetail));
+					wpStrateSingleSumMapper.update2(getwpStrateSingleSum(wpStrategyDetail));
+				}
+
 			}else { //非全量购买
-				wpStratePackSumMapper.update(getWpStratePackSumEntity(wpStrategyDetail));
-				wpStrateSingleSumMapper.update1(getwpStrateSingleSum(wpStrategyDetail));
+				if (list!=null && list.size()>0) {  //没到期 叠加
+					wpStratePackSumMapper.update3(getWpStratePackSumEntity(wpStrategyDetail));
+					wpStrateSingleSumMapper.update3(getwpStrateSingleSum(wpStrategyDetail));
+				}else {//到期，直接跟新
+					wpStratePackSumMapper.update(getWpStratePackSumEntity(wpStrategyDetail));
+					wpStrateSingleSumMapper.update1(getwpStrateSingleSum(wpStrategyDetail));
+				}
+
 			}
 		}
 		return CommonUtils.msg(number);
@@ -204,7 +217,7 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 		wpStratePackSumEntity.setPoolType(orderVo.getPoolType());
 		wpStratePackSumEntity.setStartTime(orderVo.getStartDate());
 		wpStratePackSumEntity.setEndTime(orderVo.getEndDate());
-
+		wpStratePackSumEntity.setDaySum(orderVo.getDayCount());
 		return wpStratePackSumEntity;
 	}
 
@@ -215,6 +228,7 @@ public class WpStrategyDetailServiceImpl implements WpStrategyDetailService {
 		wpStrateSingleSumEntity.setPoolType(orderVo.getPoolType());
 		wpStrateSingleSumEntity.setStartTime(orderVo.getStartDate());
 		wpStrateSingleSumEntity.setEndTime(orderVo.getEndDate());
+		wpStrateSingleSumEntity.setDaySum(orderVo.getDayCount());
 		return wpStrateSingleSumEntity;
 	}
 
